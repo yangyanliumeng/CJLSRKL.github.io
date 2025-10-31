@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生日快乐！</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            z-index: 10;
+            position: relative;
+            animation: fadeIn 1.5s ease;
+        }
+        
+        h1 {
+            color: #ff4081;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: bounce 2s infinite;
+        }
+        
+        .message {
+            font-size: 1.3rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .cake-container {
+            position: relative;
+            margin: 30px auto;
+            width: 200px;
+            height: 150px;
+        }
+        
+        .cake {
+            width: 180px;
+            height: 80px;
+            background: #f8c8dc;
+            border-radius: 10px 10px 0 0;
+            position: relative;
+            margin: 0 auto;
+        }
+        
+        .cake:before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 30px;
+            background: #ffb6c1;
+            border-radius: 10px;
+            bottom: -15px;
+            left: -10px;
+        }
+        
+        .cake:after {
+            content: '';
+            position: absolute;
+            width: 160px;
+            height: 20px;
+            background: #ff9eb5;
+            border-radius: 5px;
+            top: -10px;
+            left: 10px;
+        }
+        
+        .candle {
+            width: 10px;
+            height: 30px;
+            background: #4cd137;
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .flame {
+            width: 15px;
+            height: 25px;
+            background: #ff9d00;
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: flicker 0.8s infinite alternate;
+            box-shadow: 0 0 15px 5px #ff9d00;
+        }
+        
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 60px;
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .balloon:before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.2);
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .balloon:nth-child(1) {
+            background: #ff4081;
+            left: 10%;
+            top: 20%;
+            animation-delay: 0s;
+        }
+        
+        .balloon:nth-child(2) {
+            background: #4cd137;
+            left: 20%;
+            top: 60%;
+            animation-delay: 2s;
+        }
+        
+        .balloon:nth-child(3) {
+            background: #0097e6;
+            right: 15%;
+            top: 30%;
+            animation-delay: 4s;
+        }
+        
+        .balloon:nth-child(4) {
+            background: #fbc531;
+            right: 25%;
+            top: 70%;
+            animation-delay: 6s;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 20px;
+            background: #ff4081;
+            opacity: 0.8;
+            animation: fall 5s infinite linear;
+        }
+        
+        .confetti:nth-child(odd) {
+            background: #4cd137;
+        }
+        
+        .confetti:nth-child(even) {
+            background: #0097e6;
+        }
+        
+        .btn {
+            background: #ff4081;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
+        }
+        
+        .btn:hover {
+            background: #e91e63;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(233, 30, 99, 0.6);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1); opacity: 1; }
+            100% { transform: translateX(-50%) scale(1.1); opacity: 0.8; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(3deg); }
+            66% { transform: translateY(10px) rotate(-3deg); }
+        }
+        
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            z-index: 100;
+        }
+        
+        .music-control i {
+            font-size: 24px;
+            color: #ff4081;
+        }
+    </style>
+</head>
+<body>
+    <!-- 气球 -->
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    
+    <!-- 彩带 -->
+    <div id="confetti-container"></div>
+    
+    <!-- 主内容 -->
+    <div class="container">
+        <h1>生日快乐！</h1>
+        
+        <div class="message">
+            <p>在这个特别的日子里，</p>
+            <p>愿你被爱包围，被幸福环绕。</p>
+            <p>愿你的每一个愿望都能实现，</p>
+            <p>每一天都充满欢笑和喜悦！</p>
+        </div>
+        
+        <div class="cake-container">
+            <div class="cake">
+                <div class="candle">
+                    <div class="flame"></div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="btn" id="wishBtn">许个愿吧！</button>
+    </div>
+    
+    <!-- 音乐控制 -->
+    <div class="music-control" id="musicControl">
+        <i>🎵</i>
+    </div>
+    
+    <!-- 音频 -->
+    <audio id="birthdaySong" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-443.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script>
+        // 创建彩带
+        function createConfetti() {
+            const container = document.getElementById('confetti-container');
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                container.appendChild(confetti);
+            }
+        }
+        
+        // 播放生日歌
+        const birthdaySong = document.getElementById('birthdaySong');
+        const musicControl = document.getElementById('musicControl');
+        
+        musicControl.addEventListener('click', function() {
+            if (birthdaySong.paused) {
+                birthdaySong.play();
+                musicControl.innerHTML = '<i>🔊</i>';
+            } else {
+                birthdaySong.pause();
+                musicControl.innerHTML = '<i>🎵</i>';
+            }
+        });
+        
+        // 许愿按钮
+        document.getElementById('wishBtn').addEventListener('click', function() {
+            alert('愿你的愿望都能实现！✨\n\n生日快乐！🎂');
+            
+            // 添加更多彩带动画
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    document.getElementById('confetti-container').appendChild(confetti);
+                    
+                    // 移除彩带元素
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 5000);
+                }, i * 100);
+            }
+        });
+        
+        // 初始化
+        window.onload = function() {
+            createConfetti();
+            
+            // 自动播放音乐（需要用户交互，所以先暂停）
+            // birthdaySong.pause();
+        };
+    </script>
+</body>
+</html>
